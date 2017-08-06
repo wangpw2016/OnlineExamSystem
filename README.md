@@ -18,3 +18,15 @@
 
 主要实现的功能是考生的注册、登录和修改个人信息；根据课程类型随机抽取数据库中的考试题库并显示试题；在考试过程中会有计时功能，时间到了之后自动交卷；
 在考生提交试卷后实现自动阅卷功能，并显示本次考试成绩的细节。
+
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/01.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/02.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/03.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/04.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/05.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/06.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/11.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/12.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/13.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/14.jpg)
+![image](https://github.com/286229825/OnlineExamSystem/blob/master/WebContent/readmePic/15.jpg)
