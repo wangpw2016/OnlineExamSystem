@@ -1,7 +1,11 @@
 package serviceImpl;
 
+import java.io.OutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +46,26 @@ public class ResultServiceImpl implements ResultService {
 
 	public List<StudentresultCustom> getListByStudentId(Integer id) throws Exception {
 		return studentresultMapperCustom.getListByStudentId(id);
+	}
+
+	public void export(HttpServletResponse response, Workbook workbook, String fileName) throws Exception {
+		response.setHeader("Content-Disposition", "attachment;filename="+new String(fileName.getBytes("utf-8"),"iso8859-1"));
+		response.setContentType("application/ynd.ms-excel;charset=UTF-8");
+		OutputStream out=response.getOutputStream();
+		workbook.write(out);
+		out.flush();
+		out.close();
+	}
+
+	@Override
+	public Integer getTotalByLessonnName(String lessonName, List<StudentresultCustom> list) throws Exception {
+		int total=0;
+		for (StudentresultCustom studentresultCustom : list) {
+			if (studentresultCustom.getLessonname().equals(lessonName)) {
+				total+=studentresultCustom.getRestotal();
+			}
+		}
+		return total;
 	}
 
 }

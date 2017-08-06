@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath }/image/main_logo.ico" rel="shortcut icon">
 <title>在线考试系统-注册</title>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/easyui/jquery.min.js"></script>
@@ -61,7 +62,7 @@
 </script>
 </head>
 <body>
-<div style="line-height:120px;height:120px;background-image:url('${pageContext.request.contextPath}/image/signinback.jpg');background-size:cover">
+<div style="line-height:80px;height:80px;background-image:url('${pageContext.request.contextPath}/image/signinback.jpg');background-size:cover">
 	<font color="white" size="10" face="仿宋" style="font-weight:bold;margin-left:2%">营 养 在 线 考 试 网</font>
 </div>
 <div style="margin-top:2%;margin-left:2%">
@@ -69,7 +70,7 @@
 </div>
 <center style="margin-top:2%">
 	<form action="${pageContext.request.contextPath }/signIn.action" method="post">
-		<table cellpadding="15px">
+		<table cellpadding="6px">
 			<tr>
 				<td>帐号</td>
 				<td><input type="text" name="name"><font id="sp" color="red"></font></td>

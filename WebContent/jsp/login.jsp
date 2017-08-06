@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath }/image/main_logo.ico" rel="shortcut icon">
 <title>在线考试系统-登录</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/easyui/themes/default/easyui.css">
@@ -18,9 +19,14 @@
 	
 <script type="text/javascript">
 	$(function(){
+		var message="${requestScope.message}";
+		if (message !=null && message!="") {
+			$.messager.alert("系统提示",message);
+		}
 		$("#btn").click(function(){
 			window.location.href="${pageContext.request.contextPath}/jsp/signIn.jsp";
 		})
+		
 	})
 </script>
 </head>
@@ -42,9 +48,6 @@
 				<tr>
 					<td><input type="submit" value="登录" style="background:yellow"></td>
 					<td align="right"><input type="button" id="btn" value="注册" style="background:yellow"></td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center"><font color="white">${message }</font></td>
 				</tr>
 			</table>
 		</form>

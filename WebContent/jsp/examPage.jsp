@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath }/image/main_logo.ico" rel="shortcut icon">
 <title>在线考试系统-正在考试</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/easyui/themes/default/easyui.css">
@@ -64,10 +65,9 @@
 </script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'north'" style="line-height:105px;height:120px;background-image:url('${pageContext.request.contextPath}/image/signinback.jpg');background-size:cover">
+<div data-options="region:'north'" style="line-height:60px;height:80px;background-image:url('${pageContext.request.contextPath}/image/signinback.jpg');background-size:cover">
 	<font color="white" size="10" face="仿宋" style="font-weight:bold;margin-left:2%">营 养 在 线 考 试 网</font>
 	<font id="ft1" size="3px" style="margin-left:5%">当 前 考 生：<span id="sp1">${sessionScope.studentName }</span></font>
-	<font id="ft2" size="3px" style="margin-left:2%">考 试 课 程：<span id="sp2">${list[0].lessonName }</span></font>
 	<font id="ft3" size="3px" style="margin-left:2%">考 试 限 时：<span id="sp3">2分钟</span></font>
 	<font id="ft4" size="3px" style="margin-left:2%">剩 余 时 间：<span id="sp4"></span></font>
 </div>

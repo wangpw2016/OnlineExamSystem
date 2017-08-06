@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath }/image/main_logo.ico" rel="shortcut icon">
 <title>在线考试系统-后台登录</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/easyui/themes/default/easyui.css">

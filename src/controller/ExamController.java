@@ -51,12 +51,16 @@ public class ExamController {
 	public ModelAndView toExamPage(Integer lessonid) throws Exception{
 		ModelAndView modelAndView=new ModelAndView();
 		List<Taoti> list = taotiService.findListByLessonid(lessonid);
-		Integer length=list.size();
-		Integer index=(int) (Math.random()*(length-1));
-		Taoti taoti=list.get(index);
-		List<QuestionsCustom> list2 = questionsService.findListByTaotiid(taoti.getId());
+		if (list.size()>0) {
+			Integer length=list.size();
+			Integer index=(int) (Math.random()*(length-1));
+			Taoti taoti=list.get(index);
+			List<QuestionsCustom> list2 = questionsService.findListByTaotiid(taoti.getId());
+			modelAndView.addObject("list", list2);
+		}else {
+			modelAndView.addObject("list", null);
+		}
 		modelAndView.setViewName("/examPage");
-		modelAndView.addObject("list", list2);
 		return modelAndView;
 	}
 	

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,12 +22,6 @@ public class LessonController {
 	@Autowired
 	private LessonService lessonService;
 	
-	@RequestMapping("/managerToLessonList.action")
-	public String managerToLessonList(HttpServletRequest request) throws Exception{
-		request.setAttribute("myurl", request.getContextPath()+"/jsp/managerLessonList.jsp");
-		return "/managerIndex";
-	}
-	
 	@RequestMapping("/managerGetLessonList.action")
 	public @ResponseBody Map<String, Object> managerGetLessonList(Pagination pagination) throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
@@ -38,9 +33,12 @@ public class LessonController {
 	}
 	
 	@RequestMapping("/managerDeleteLesson.action")
-	public String managerDeleteLesson(Integer id) throws Exception{
-		lessonService.deleteOneById(id);
-		return "redirect:managerToLessonList.action";
+	public @ResponseBody String managerDeleteLesson(@RequestBody String idsStr) throws Exception{
+		String[] ids = idsStr.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			lessonService.deleteOneById(Integer.parseInt(ids[i]));
+		}
+		return "success";
 	}
 	
 	@RequestMapping("/managerToAddLesson.action")
@@ -50,10 +48,10 @@ public class LessonController {
 	}
 	
 	@RequestMapping("/managerAddLesson.action")
-	public String managerAddLesson(Lesson lesson) throws Exception{
+	public @ResponseBody String managerAddLesson(Lesson lesson) throws Exception{
 		lesson.setCreatetime(new Date());
 		lessonService.addOne(lesson);
-		return "redirect:managerToLessonList.action";
+		return "success";
 	}
 	
 	@RequestMapping("/managerGetLessons.action")

@@ -6,10 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,12 +23,6 @@ public class QuestionsController {
 	@Autowired
 	private QuestionsService questionsService;
 	
-	@RequestMapping("/managerToQuestionsList.action")
-	public String managerToQuestionsList(HttpServletRequest request) throws Exception{
-		request.setAttribute("myurl", request.getContextPath()+"/jsp/managerQuestionsList.jsp");
-		return "/managerIndex";
-	}
-	
 	@RequestMapping("/managerGetQuestionsList.action")
 	public @ResponseBody Map<String, Object> managerGetQuestionsList(Pagination pagination) throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
@@ -41,33 +34,19 @@ public class QuestionsController {
 	}
 	
 	@RequestMapping("/managerDeleteQuestion.action")
-	public String managerDeleteQuestion(Integer id) throws Exception{
-		questionsService.deleteOneById(id);
-		return "redirect:managerToQuestionsList.action";
-	}
-	
-	@RequestMapping("/managerToAddQuestion.action")
-	public String managerToAddQuestion(HttpServletRequest request) throws Exception{
-		request.setAttribute("myurl", request.getContextPath()+"/jsp/managerAddQuestion.jsp");
-		return "/managerIndex";
+	public @ResponseBody String managerDeleteQuestion(@RequestBody String idsStr) throws Exception{
+		String[] ids = idsStr.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			questionsService.deleteOneById(Integer.parseInt(ids[i]));
+		}
+		return "success";
 	}
 	
 	@RequestMapping("/managerAddQuestion.action")
-	public String managerAddQuestion(Questions questions) throws Exception{
+	public @ResponseBody String managerAddQuestion(Questions questions) throws Exception{
 		questions.setCreatetime(new Timestamp(new Date().getTime()));
 		questionsService.addOne(questions);
-		return "redirect:managerToQuestionsList.action";
-	}
-	
-	@RequestMapping("/managerToUpdateQuestions.action")
-	public String managerToUpdateQuestions(String id,HttpServletRequest request) throws Exception{
-		try {
-			Integer id2=Integer.parseInt(id);
-			request.setAttribute("myurl", request.getContextPath()+"/jsp/managerUpdateQuestion.jsp?id="+id2);
-			return "/managerIndex";
-		} catch (Exception e) {
-			return "redirect:managerToQuestionsList.action";
-		}
+		return "success";
 	}
 	
 	@RequestMapping("/managerGetQuestionInfo.action")
@@ -76,8 +55,8 @@ public class QuestionsController {
 	}
 	
 	@RequestMapping("/managerUpdateQuestion.action")
-	public String managerUpdateQuestion(Questions questions) throws Exception{
+	public @ResponseBody String managerUpdateQuestion(Questions questions) throws Exception{
 		questionsService.updateOne(questions);
-		return "redirect:managerToQuestionsList.action";
+		return "success";
 	}
 }

@@ -5,18 +5,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/easyui/themes/icon.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/easyui/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/easyui/locale/easyui-lang-zh_CN.js"></script>
+
 <script type="text/javascript">
 	$(function(){
 		$("#tt").datagrid({
 			url:'${pageContext.request.contextPath}/managerStudentGetList.action',
 			pagination:true,
-			pageList:[10],
-			pageSize:10,
-			singleSelect:true,
-			width:1002,
+			rownumbers:true,
+			fit:true,
+			fitColumns:true,
+			toolbar:'#tb',
 			columns:[[
+				{
+					field:'cb',
+					align:'center',
+					checkbox:true,
+				},
 				{
 					field:'id',
 					title:'编号',
@@ -59,28 +73,48 @@
 					title:'专业',
 					width:200,
 					align:'center',
-				},
-				{
-					field:'id2',
-					title:'操作',
-					width:100,
-					align:'center',
-					formatter:function(value,row){
-						var str="<a href='${pageContext.request.contextPath}/managerDeleteStudent.action?id="+row.id+"' onclick='return confirm(\"确定要删除吗？\")'>删除</a>";
-						return str;
-					}
 				}
 			]]
 		})
 	})
+	
+	function deleteStudent(){
+		var selections=$("#tt").datagrid("getSelections");
+		if (selections.length==0) {
+			$.messager.alert("系统提示","请选择要删除的数据！");
+			return;
+		}
+		var ids=[];
+		for (var i = 0; i < selections.length; i++) {
+			ids.push(selections[i].id);
+		}
+		var idsStr = ids.join();
+		$.messager.confirm("系统提示","确定要删除这"+selections.length+"条数据吗？",function(r){
+			if (r) {
+				$.ajax({
+					url:'${pageContext.request.contextPath }/managerDeleteStudent.action',
+					data:idsStr,
+					type:'post',
+					contentType:'application/json;charset=utf-8',
+					success:function(result){
+						if (result=="success") {
+							$.messager.alert("系统提示","删除成功！");
+							closeDialog();
+							$("#tt").datagrid("reload");
+						}else{
+							$.messager.alert("系统提示","删除失败，请联系系统管理员！");
+						}
+					}
+				})
+			}
+		})
+	}
 </script>
-<div style="margin-top:2%;margin-left:2%">
-	<font color="black">当前位置 ： 管理员信息列表</font>
-</div>
-<br>
-<br>
-<center>
+</head>
+<body style="margin: 1px">
 <table id="tt"></table>
-</center>
+<div id="tb">
+	<a href="javascript:deleteStudent()" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
+</div>
 </body>
 </html>

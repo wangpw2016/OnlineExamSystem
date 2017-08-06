@@ -5,10 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="${pageContext.request.contextPath }/image/main_logo.ico" rel="shortcut icon">
 <title>在线考试系统-考试成绩</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/easyui/themes/icon.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/easyui/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/easyui/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-<div style="line-height:120px;height:120px;background-image:url('${pageContext.request.contextPath}/image/signinback.jpg');background-size:cover">
+<div style="line-height:80px;height:80px;background-image:url('${pageContext.request.contextPath}/image/signinback.jpg');background-size:cover">
 	<font color="white" size="10" face="仿宋" style="font-weight:bold;margin-left:2%">营 养 在 线 考 试 网</font>
 	<font id="ft" style="margin-left:40%">当 前 考 生：<span id="sp">${sessionScope.studentName }</span></font>
 </div>
@@ -19,7 +30,7 @@
 <center>
 	<c:choose>
 	<c:when test="${!empty resultList}">
-	<table cellpadding="20px" cellspacing="0px" border="1px">
+	<table cellpadding="10px" cellspacing="0px" border="1px">
 		<tr style="background:#A6FFFF">
 			<td align="center">考试课程</td>
 			<td align="center">准考证号</td>
@@ -47,8 +58,17 @@
 	</c:otherwise>
 	</c:choose>
 	<br>
-	<a href="${pageContext.request.contextPath }/jsp/index.jsp">回 到 首 页</a>
+	<a href="${pageContext.request.contextPath }/jsp/index.jsp" class="easyui-linkbutton" data-options="iconCls:'icon-back'">回 到 首 页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="${pageContext.request.contextPath }/saveExcel.action" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保 存 表 格</a>
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div>
+		<img alt="您的擅长学科分析图" src="${pageContext.request.contextPath }/DisplayChart?filename=${filename}" width="700" height="500">
+	</div>
 </center>
+
 </body>
 </html>

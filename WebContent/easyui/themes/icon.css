@@ -67,7 +67,42 @@
 .icon-more{
 	background:url('icons/more.png') no-repeat center center;
 }
-
+.icon-items{
+	background:url('icons/items.png') no-repeat center center;
+}
+.icon-group{
+	background:url('icons/group.png') no-repeat center center;
+}
+.icon-allowed{
+	background:url('icons/allowed.png') no-repeat center center;
+}
+.icon-flow{
+	background:url('icons/flow.png') no-repeat center center;
+}
+.icon-system{
+	background:url('icons/system.png') no-repeat center center;
+}
+.icon-deployment{
+	background:url('icons/deployment.png') no-repeat center center;
+}
+.icon-definition{
+	background:url('icons/definition.png') no-repeat center center;
+}
+.icon-tasks{
+	background:url('icons/tasks.png') no-repeat center center;
+}
+.icon-service{
+	background:url('icons/service.png') no-repeat center center;
+}
+.icon-ask{
+	background:url('icons/ask.png') no-repeat center center;
+}
+.icon-signout{
+	background:url('icons/signout.png') no-repeat center center;
+}
+.icon-upload{
+	background:url('icons/upload.png') no-repeat center center;
+}
 
 .icon-mini-add{
 	background:url('icons/mini_add.png') no-repeat center center;

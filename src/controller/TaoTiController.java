@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,33 +40,19 @@ public class TaoTiController {
 	}
 	
 	@RequestMapping("/managerDeleteTaoti.action")
-	public String managerDeleteTaoti(Integer id) throws Exception{
-		taotiService.deleteOneById(id);
-		return "redirect:managerToTaotiList.action";
-	}
-	
-	@RequestMapping("/managerToAddTaoti.action")
-	public String managerToAddTaoti(HttpServletRequest request) throws Exception{
-		request.setAttribute("myurl", request.getContextPath()+"/jsp/managerAddTaoti.jsp");
-		return "/managerIndex";
+	public @ResponseBody String managerDeleteTaoti(@RequestBody String idsStr) throws Exception{
+		String[] ids = idsStr.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			taotiService.deleteOneById(Integer.parseInt(ids[i]));
+		}
+		return "success";
 	}
 	
 	@RequestMapping("/managerAddTaoti.action")
-	public String managerAddTaoti(Taoti taoti) throws Exception{
+	public @ResponseBody String managerAddTaoti(Taoti taoti) throws Exception{
 		taoti.setCreatetime(new Date());
 		taotiService.addOne(taoti);
-		return "redirect:managerToTaotiList.action";
-	}
-	
-	@RequestMapping("/managerToUpdateTaoti.action")
-	public String managerToUpdateTaoti(HttpServletRequest request,String id) throws Exception{
-		try {
-			Integer id2=Integer.parseInt(id);
-			request.setAttribute("myurl", request.getContextPath()+"/jsp/managerUpdateTaoti.jsp?id="+id2);
-			return "/managerIndex";
-		} catch (Exception e) {
-			return "redirect:managerToTaotiList.action";
-		}
+		return "success";
 	}
 	
 	@RequestMapping("/managerGetTaotiInfo.action")
@@ -75,9 +62,9 @@ public class TaoTiController {
 	}
 	
 	@RequestMapping("/managerUpdateTaoti.action")
-	public String managerUpdateTaoti(Taoti taoti) throws Exception{
+	public @ResponseBody String managerUpdateTaoti(Taoti taoti) throws Exception{
 		taotiService.updateOne(taoti);
-		return "redirect:managerToTaotiList.action";
+		return "success";
 	}
 	
 	@RequestMapping("/managerGetTaotis.action")

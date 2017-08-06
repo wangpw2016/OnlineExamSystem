@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -89,12 +90,6 @@ public class StudentController {
 		return "redirect:/jsp/index.jsp";
 	}
 	
-	@RequestMapping("/managerToStudentList.action")
-	public String managerToStudentList(HttpServletRequest request) throws Exception{
-		request.setAttribute("myurl", request.getContextPath()+"/jsp/managerStudentList.jsp");
-		return "/managerIndex";
-	}
-	
 	@RequestMapping("/managerStudentGetList.action")
 	public @ResponseBody Map<String, Object> managerStudentGetList(Pagination pagination) throws Exception{
 		Map<String, Object> map=new HashMap<String, Object>();
@@ -106,9 +101,12 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/managerDeleteStudent.action")
-	public String managerDeleteStudent(Integer id) throws Exception{
-		studentService.deleteOneById(id);
-		return "redirect:managerToStudentList.action";
+	public @ResponseBody String managerDeleteStudent(@RequestBody String idsStr) throws Exception{
+		String[] ids = idsStr.split(",");
+		for (int i = 0; i < ids.length; i++) {
+			studentService.deleteOneById(Integer.parseInt(ids[i]));
+		}
+		return "success";
 	}
 	
 }
